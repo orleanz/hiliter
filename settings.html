@@ -1,0 +1,143 @@
+<html>
+<head>
+  <title>
+    Hiliter Settings
+  </title>
+
+  <style type="text/css">
+
+  td {
+    border: 1px solid Gainsboro;
+    padding: 0.5em;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  </style>
+
+  <script type="text/javascript" src="jquery-2.1.3.min.js"></script>
+  <script type="text/javascript" src="underscore-min.js"></script>
+
+</head>
+
+<body>
+
+<div style="margin:2em auto;width:60%;text-align:left;font-size:medium;cursor:pointer;">
+
+  <span style="border:0px solid gray;padding:0.5em;">
+    <span id="toolStatus"></span>
+    <button id="toolStatusBtn" style="font-size:large;">tool status</button>
+  </span>
+
+  <span id="reset" style="float:right;cursor:pointer;color:darkred;white-space:nowrap;">[ reset to defaults ]</span>
+
+</div>
+
+<div style="margin:1em auto 0;width:60%;text-align:right;font-size:small;">
+
+  <span style="font-size:large;float:left;">current dictionary:
+   <select style="margin-left:1em;" id="selector"></select>
+   <span style="margin-left:1em;font-size:small;color:red;" id="modifiedAlert"></span>
+  </span>
+
+  page size 
+  <select id="pageSize" style="margin-right:2em;">
+    <option value="10">10</option>
+    <option value="20">20</option>
+    <option value="30">30</option>
+    <option value="50">50</option>
+  </select>
+
+  page num <select id="pageNum" ></select>
+
+</div>
+  
+<table id="maintab" style="width:60%;margin:2em auto; border-collapse: collapse;"></table>
+
+
+<div style="border:0px dotted;margin:1em auto; width:60%;font-size:medium;">
+  
+  <div style="margin:2em 0;">
+    search for
+    <input type="text" id="searchToken" style="margin-left:1em; width:13em;">    
+    <button id="doSearch">set</button>
+    <button id="searchClear">clear</button>
+   </div>
+
+  <div style="margin:0.7em 0;">
+      <span>save current dictionary as:</span>
+      <input type="text" id="saveDictName" style="margin-left:1em;width:10em;">
+      <button id="saveDict">save</button>
+  
+      <span style="float:right;">
+        <button  id="deleteDict">delete</button> current dictionary
+      </span>
+
+  </div>
+
+</div>
+
+<div id="bulkInputToggle" style="margin:2em auto;width:60%;font-size:large;color:darkblue;cursor:pointer;"
+  title="toggle export and import tools">
+  <button><span style="font-size:large;">export and import tools</span></button>
+</div>
+
+<div id="bulkInput" style="display:none;margin:1em auto;width:60%;font-size:medium;">
+
+  <table style="width:100%; margin-top:0.5em; border-collapse: collapse;">
+
+    <tr>
+      <td style="width:30%;">
+        Import
+        <br>newline separated pairs
+        <br><br>
+        <button id="importLines"> import</button>
+      </td>
+      <td style="text-align:left;">
+      <textarea id="importText" style="width:100%;" rows=5>
+word1:translation1
+word2:translation2
+word3:translation3
+...
+      </textarea>
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        Export 
+        JSON-formated data
+        <br><br>
+        <button id="exportJSON"> export </button>
+        <span id="exportJSONHelp" style="cursor:pointer; margin-left:1em;color:darkgreen;">[info]</span>
+      </td>
+      <td>
+        <textarea id="exportJSONText" style="width:100%;" rows=4></textarea>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Import current dictionary
+        <br>in JSON format 
+        <br><br>
+        <button id="importJSON"> import </button>
+        <span id="importJSONHelp" style="cursor:pointer; margin-left:1em;color:darkgreen;">[info]</span>
+      </td>
+      <td>
+        <textarea id="importJSONText" style="width:100%;" rows=4></textarea>
+      </td>
+    </tr>
+
+
+  </table>
+
+</div>
+
+<br><br><br>
+
+<script type="text/javascript" src="dicts.js"></script>
+<script type="text/javascript" src="settings.js"></script>
+
+</body>
+</html>
