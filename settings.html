@@ -30,6 +30,25 @@
   </span>
 
   <span id="reset" style="float:right;cursor:pointer;color:darkred;white-space:nowrap;">[ reset to defaults ]</span>
+  <span id="about" style="float:right;cursor:pointer;color:green;white-space:nowrap;margin-right:2em;">[ word trainer site ]</span>
+
+</div>
+
+<div id="aboutBlock" 
+  style="display:none;margin:1em auto 0;width:60%;font-size:medium;padding:0.5em;border:1px dotted gray;">
+
+  <ul>
+ 
+    <li style="line-height:2.5em;">Ukrainian, Belarusian and Russian wordlists this tool is using can be viewed / rechecked / played with at our word trainer site: 
+     <a href="http://trainer.lentascope.net">http://trainer.lentascope.net</a>
+    </li>
+
+
+    <li style="line-height:2.5em;">this extension's source code is available at our <a href="https://github.com/orleanz/hiliter">github page</a>
+    <br> everybody is welcome to bugfix the code or improve the wordlists
+    </li>
+
+  </ul>
 
 </div>
 
@@ -57,10 +76,8 @@
 
 <div style="border:0px dotted;margin:1em auto; width:60%;font-size:medium;">
   
-  <div style="margin:2em 0;">
-    search for
-    <input type="text" id="searchToken" style="margin-left:1em; width:13em;">    
-    <button id="doSearch">set</button>
+  <div style="margin:2em 0;vertical-align:middle;">search for:<input type="text" id="searchToken" style="margin-left:1em; width:13em;">
+    <button id="doSearch"><img src="search.png" style="vertical-align:bottom;"/> run search</button>
     <button id="searchClear">clear</button>
    </div>
 
@@ -70,16 +87,23 @@
       <button id="saveDict">save</button>
   
       <span style="float:right;">
-        <button  id="deleteDict">delete</button> current dictionary
+        <button  id="deleteDict"><img src="delete.png" style="height:16px;vertical-align:bottom;"/> delete current dictionary</button> 
       </span>
 
   </div>
 
 </div>
 
-<div id="bulkInputToggle" style="margin:2em auto;width:60%;font-size:large;color:darkblue;cursor:pointer;"
+
+<div style="margin:2em auto;width:60%;font-size:medium;">
+  <label for="useInlineReplacement">use inline replacement instead of highlighting:</label>
+  <input style="vertical-align:bottom" id="useInlineReplacement" type="checkbox">
+</div>
+
+
+<div id="bulkInputToggle" style="margin:2em auto;width:60%;font-size:medium;color:darkblue;cursor:pointer;"
   title="toggle export and import tools">
-  <button><span style="font-size:large;">export and import tools</span></button>
+  <button><span style="font-size:medium;">show export and import tools</span></button>
 </div>
 
 <div id="bulkInput" style="display:none;margin:1em auto;width:60%;font-size:medium;">
@@ -105,7 +129,8 @@ word3:translation3
     
     <tr>
       <td>
-        Export 
+        Export current dictionary as
+        <br>
         JSON-formated data
         <br><br>
         <button id="exportJSON"> export </button>
@@ -118,8 +143,8 @@ word3:translation3
 
     <tr>
       <td>
-        Import current dictionary
-        <br>in JSON format 
+        Import 
+        <br>previously exported data
         <br><br>
         <button id="importJSON"> import </button>
         <span id="importJSONHelp" style="cursor:pointer; margin-left:1em;color:darkgreen;">[info]</span>

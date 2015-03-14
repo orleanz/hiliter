@@ -44,6 +44,9 @@ $("#reset").click(function() {
     }
     localStorage.removeItem("customDictNames");
 
+    localStorage.removeItem("useInlineReplacement");
+    localStorage.removeItem("lastOpDuration");
+      
     window.location.reload(true);
   }
 
@@ -87,11 +90,11 @@ function showSwitch() {
 
   if (status === "true") {
     sp.parentNode.style.backgroundColor = "lightgreen";
-    sp.textContent = "status: tool ENABLED";
+    sp.textContent = "Hiliter ENABLED";
     btn.textContent = "disable";
   } else {
-    sp.parentNode.style.backgroundColor = "LightSalmon";
-    sp.textContent = "status: tool DISABLED";
+    sp.parentNode.style.backgroundColor = "pink";
+    sp.textContent = "Hiliter DISABLED";
     btn.textContent = "enable";
   }
   
@@ -145,6 +148,24 @@ $("#selector").change(function() {
 
     buildTable();
   }
+
+});
+
+
+$("#useInlineReplacement").change(function() {
+
+ if($('#useInlineReplacement').prop('checked')) {
+    localStorage.setItem("useInlineReplacement", "true");
+  } else {
+    localStorage.setItem("useInlineReplacement", "false");
+  }
+
+});
+
+
+$("#about").click(function() {
+
+  $("#aboutBlock").slideToggle();
 
 });
 
@@ -259,8 +280,6 @@ $("#deleteDict").click(function() {
       localStorage.removeItem("currentDict");
       localStorage.removeItem("currentDictName");
       localStorage.removeItem("currentDictModified");
-
-      // localStorage.removeItem("lastOpDuration");
 
       buildSelectorList();
       buildTable();
@@ -393,6 +412,11 @@ function buildTable() {
     $("#modifiedAlert").text("[modified]");
   }
 
+  var useInlineReplacement = localStorage.getItem("useInlineReplacement") || "false";
+  if (useInlineReplacement == "true") {
+    $("#useInlineReplacement").prop('checked', 'true');
+  }
+
   // var lastOpDuration = localStorage.getItem("lastOpDuration") || "";
   // if (lastOpDuration) {
   //   $("#lastOpDuration").text("last replacement took " + lastOpDuration + " milliseconds");
@@ -425,8 +449,8 @@ function buildTable() {
   td0.appendChild(size);
 
   var sp1 = document.createElement("span");
-  sp1.textContent = "add new pair";
-  sp1.style.margin = "0 0.5em";
+  sp1.textContent = "add new pair:";
+  sp1.style.margin = "0 0.5em 0 1em";
   td0.appendChild(sp1);
 
   td0.setAttribute("colspan", "4");

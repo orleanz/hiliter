@@ -2,16 +2,18 @@
 
   chrome.runtime.sendMessage({method: "getDB"}, function(response) {
 
+    if (!response.enabled) return;
+
+    console.info(response.inline);
+
     var dtStart = new Date().getTime();
 
     var splitter = new RegExp("([\\s|,|;|\\?|\\.|!])");
-
-    if (response.enabled == "false") return;
-    
+   
     var wordlist = JSON.parse(response.db);
 
     var clipLim = 2;
-    var clipMinLength = 4;
+    var clipMinLength = 5;
 
     var dict = {};    
     for (var i = 0; i <= clipLim; i++) {
@@ -44,18 +46,28 @@
 
                 if (tr) {
 
-                    if (textCollect) {
-                        bigSpan.appendChild(document.createTextNode(textCollect));
-                        textCollect = "";
+                    if (response.inline) {
+
+                        var tr2 = tr.split("=>");
+                        var tmp = tr2.length > 1 ? tr2[1] : tr;
+                        textCollect += curText + " [" + tmp.trim() + "]";
+
+                    } else {
+
+                        if (textCollect) {
+                            bigSpan.appendChild(document.createTextNode(textCollect));
+                            textCollect = "";
+                        }
+
+                        var s = document.createElement("span");
+                        s.textContent = curText;
+
+                        s.style.borderBottom = "1px dotted gray";
+                        // s.style.textDecoration = "underline";
+                        s.title = tr;
+                        bigSpan.appendChild(s);
+
                     }
-
-                    var s = document.createElement("span");
-                    s.textContent = curText;
-
-                    s.style.borderBottom = "1px dotted gray";
-                    // s.style.textDecoration = "underline";
-                    s.title = tr;
-                    bigSpan.appendChild(s);
 
                 } else {
 
@@ -69,11 +81,10 @@
                 bigSpan.appendChild(document.createTextNode(textCollect));
             }
 
-
             node.parentNode.replaceChild(bigSpan, node);
+
         }
-
-
+        
     }
 
     var dtFinish = new Date().getTime();
