@@ -3,7 +3,7 @@
 
   "name": "Hiliter",
   "description": "Highlights some words on webpages, using internal customizable dictionary.",
-  "version": "1.1",
+  "version": "1.2",
   
   "content_scripts": [
     {
