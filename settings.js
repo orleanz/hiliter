@@ -22,6 +22,13 @@ $(document).keydown(function(event) {
 buildSelectorList();
 buildTable();
 
+$("#inlineModeHelp").click(function() {
+  alert("Default behaviour of Hiliter is to leave the actual word intact and to add mouse-over tip.\n\n" +  
+    "Second option ('add') adds translation to the actual word directly on the page.\n\n" + 
+    "Last option ('replace') is to tell Hiliter to replace the actual word with translation " + 
+    "and to show the actual word in mouse-over tip.");
+});
+
 $("#bulkInputToggle").click(function() { $("#bulkInput").slideToggle()});
 
 $("#reset").click(function() { 
@@ -152,13 +159,9 @@ $("#selector").change(function() {
 });
 
 
-$("#useInlineReplacement").change(function() {
+$("#useInlineReplacement").change(function(ev) {
 
- if($('#useInlineReplacement').prop('checked')) {
-    localStorage.setItem("useInlineReplacement", "true");
-  } else {
-    localStorage.setItem("useInlineReplacement", "false");
-  }
+  localStorage.setItem("useInlineReplacement", ev.target.selectedIndex);
 
 });
 
@@ -412,10 +415,8 @@ function buildTable() {
     $("#modifiedAlert").text("[modified]");
   }
 
-  var useInlineReplacement = localStorage.getItem("useInlineReplacement") || "false";
-  if (useInlineReplacement == "true") {
-    $("#useInlineReplacement").prop('checked', 'true');
-  }
+  var inlineInd = localStorage.getItem("useInlineReplacement") || 0;
+  document.getElementById("useInlineReplacement").selectedIndex = inlineInd;
 
   // var lastOpDuration = localStorage.getItem("lastOpDuration") || "";
   // if (lastOpDuration) {
