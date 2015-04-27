@@ -4,8 +4,6 @@
 
     if (!response.enabled) return;
 
-    console.info(response.inline);
-
     var dtStart = new Date().getTime();
 
     var splitter = new RegExp("([\\s|,|;|\\?|\\.|!])");
@@ -27,10 +25,6 @@
         var node = tns[i];
         var nv = node.nodeValue.trim();
 
-        if (nv.indexOf("настоящий") != -1) {
-            debugger;
-        }
-
         if (nv && hasWordFromList(nv)) {
 
             var ar = nv.split(splitter);
@@ -43,12 +37,13 @@
 
                 var curText = ar[j];
                 var tr = getTranslation(curText);
-
+                
                 if (tr) {
 
-                    if (response.inline) {
+                    var tr2 = tr.split("=>");
 
-                        var tr2 = tr.split("=>");
+                    if (response.inline == 1) {
+
                         var tmp = tr2.length > 1 ? tr2[1] : tr;
                         textCollect += curText + " [" + tmp.trim() + "]";
 
@@ -60,11 +55,16 @@
                         }
 
                         var s = document.createElement("span");
-                        s.textContent = curText;
-
                         s.style.borderBottom = "1px dotted gray";
-                        // s.style.textDecoration = "underline";
-                        s.title = tr;
+
+                        if (response.inline == 2) {
+                            s.textContent = tr2.length > 1 ? tr2[1] : tr;
+                            s.title = curText;
+                        } else {
+                            s.textContent = curText;
+                            s.title = tr;
+                        }
+                        
                         bigSpan.appendChild(s);
 
                     }
