@@ -96,10 +96,16 @@
 
 
 <div style="margin:2em auto;width:60%;font-size:medium;">
-  <label for="useInlineReplacement">use inline replacement instead of highlighting:</label>
-  <input style="vertical-align:bottom" id="useInlineReplacement" type="checkbox">
-</div>
+  add or replace inline
+  <select id="useInlineReplacement">
+      <option value="0">disabled</option>
+      <option value="1">add inline</option>
+      <option value="0">replace inline</option>
+  </select>
 
+  <span id="inlineModeHelp" style="color:green; cursor:pointer;margin-left:1em;">[info]</span>
+
+</div>
 
 <div id="bulkInputToggle" style="margin:2em auto;width:60%;font-size:medium;color:darkblue;cursor:pointer;"
   title="toggle export and import tools">
